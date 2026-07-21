@@ -19,6 +19,7 @@ export const NAVIGATION = [
   { href: import.meta.env.BASE_URL, label: "Home" },
   { href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/blog`, label: "Blogs" },
   { href: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/about`, label: "About" },
+  { href: "https://github.com/KaidAkram/dojo", label: "Source" },
 ]
 
 export const SOCIALS: { href: string; label: string; icon: SvgComponent }[] = [

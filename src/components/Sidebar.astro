@@ -39,6 +39,8 @@ const base = import.meta.env.BASE_URL
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
                 class="sidebar-link"
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
               >
                 {isActive ? (
                   <span class="kali-active">
