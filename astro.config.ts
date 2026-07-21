@@ -13,9 +13,9 @@ import { headingAnchors } from "./src/lib/heading-anchors"
 
 export default defineConfig({
   site: "https://kaidakram.github.io",
-  base: "/myblog",
+  base: "/dojo",
   redirects: {
-    '/authors/0xakr4m': '/myblog/about'
+    '/authors/0xakr4m': '/dojo/about'
   },
   compressHTML: true,
   prefetch: { prefetchAll: true },
