@@ -30,5 +30,4 @@ export const SOCIALS: { href: string; label: string; icon: SvgComponent }[] = [
     icon: LinkedIn,
   },
   { href: "https://discord.com/users/akramkaid_27366", label: "Discord", icon: Discord },
-  { href: `${import.meta.env.BASE_URL}/rss.xml`.replace(/\/\/+/g, '/'), label: "RSS", icon: RSS },
 ]
