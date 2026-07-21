@@ -49,7 +49,7 @@ const recentPosts = allPosts.slice(0, 3)
       {recentPosts.map((post) => <BlogCard post={post} />)}
     </ul>
     <p class="view-all">
-      <a href={`${import.meta.env.BASE_URL}blog`}>Enter the dojo to see all →</a>
+      <a href={`${import.meta.env.BASE_URL}/blog`.replace(/\/\/+/g, '/')}>Enter the dojo to see all →</a>
     </p>
   </recent-posts>
 </Layout>

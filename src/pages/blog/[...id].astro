@@ -95,7 +95,7 @@ if (isSubpost(post.id)) {
                 </author-avatars>
                 <author-names>
                   {authors.map((author, j) => (
-                    <>{j > 0 && ", "}<a href={`${import.meta.env.BASE_URL}authors/${author.id}`}>{author.data.name}</a></>
+                    <>{j > 0 && ", "}<a href={`${import.meta.env.BASE_URL}/authors/${author.id}`.replace(/\/\/+/g, '/')}>{author.data.name}</a></>
                   ))}
                 </author-names>
               </post-authors>
