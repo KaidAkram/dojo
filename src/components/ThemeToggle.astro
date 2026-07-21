@@ -193,7 +193,7 @@ import SunIcon from "@/assets/icons/sun.svg"
   const setupThemeToggle = () => {
     const toggleTheme = () => {
       // Play the Angry Vegeta NANI sound from local public folder
-      const audio = new Audio(`${import.meta.env.BASE_URL}vegeta.webm`)
+      const audio = new Audio(`${import.meta.env.BASE_URL}/vegeta.webm`.replace(/\/\/+/g, '/'))
       audio.volume = 0.5 // reduced volume
       
       // Wait for audio to load before setting currentTime, otherwise it crashes on slow networks
