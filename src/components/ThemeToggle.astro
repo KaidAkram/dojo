@@ -194,14 +194,21 @@ import SunIcon from "@/assets/icons/sun.svg"
     const toggleTheme = () => {
       // Play the Angry Vegeta NANI sound from local public folder
       const audio = new Audio(`${import.meta.env.BASE_URL}vegeta.webm`)
-      audio.currentTime = 2 // start at 3 seconds as requested
       audio.volume = 0.5 // reduced volume
-      audio.play().catch((e) => console.log("Audio play failed:", e))
       
-      // Stop the audio after exactly 1,5 second so it doesn't play the whole video
-      setTimeout(() => {
-        audio.pause()
-      }, 1500)
+      // Wait for audio to load before setting currentTime, otherwise it crashes on slow networks
+      audio.addEventListener("canplay", () => {
+        audio.currentTime = 2 // start at 3 seconds as requested
+        audio.play().catch((e) => console.log("Audio play failed:", e))
+        
+        // Stop the audio after exactly 1.5 seconds
+        setTimeout(() => {
+          audio.pause()
+        }, 1500)
+      }, { once: true })
+      
+      // Fallback: manually trigger load
+      audio.load()
 
       // Show custom modal
       const modal = document.getElementById("nani-modal")
