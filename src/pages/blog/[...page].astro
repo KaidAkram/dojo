@@ -1,0 +1,68 @@
+---
+import BlogCard from "@/components/BlogCard.astro"
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getPosts } from "@/lib/content"
+import type { GetStaticPaths } from "astro"
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPosts()
+  // Generate pages based on 5 posts per page
+  return paginate(posts, { pageSize: 5 })
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props
+---
+
+<Layout>
+  <MetaPage slot="head" title="Blog" />
+  <ul transition:name="blog-list">
+    {page.data.map((post) => <BlogCard post={post} />)}
+  </ul>
+
+  <!-- Pagination Controls -->
+  {(page.url.prev || page.url.next) && (
+    <nav aria-label="Blog pagination" class="pagination">
+      {page.url.prev ? <a href={page.url.prev} class="btn">← Previous</a> : <span class="btn disabled">← Previous</span>}
+      <span class="page-info">Page {page.currentPage} of {page.lastPage}</span>
+      {page.url.next ? <a href={page.url.next} class="btn">Next →</a> : <span class="btn disabled">Next →</span>}
+    </nav>
+  )}
+</Layout>
+
+<style>
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  .btn:hover:not(.disabled) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .page-info {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+</style>

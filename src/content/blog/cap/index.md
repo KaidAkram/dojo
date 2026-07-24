@@ -4,7 +4,7 @@ description: "Popping Cap on HTB by finding an IDOR vulnerability and abusing Li
 date: 2026-07-24
 tags: ["hackthebox", "linux", "idor", "capabilities", "privilege-escalation"]
 authors: ["0xakr4m"]
-image: ../images/headers/vagabond-04.png
+image: ../images/headers/vagabond-cap.png
 draft: false
 ---
 
