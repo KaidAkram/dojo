@@ -4,7 +4,7 @@ description: "A deep dive into Next-Concept Modeling (arXiv:2610.14162v1), from 
 date: 2026-10-23
 tags: ["ai", "deep-learning", "ncm", "transformers", "hardware", "systems", "research"]
 authors: ["0xakr4m"]
-image: ../images/headers/vagabond-01.png
+image: ../images/headers/vagabond-ncm.png
 draft: false
 ---
 
@@ -82,7 +82,7 @@ The answer is subtle, precise, and vital:
 - **Yes, we FUNDAMENTALLY change the generation topology.** Standard LLMs treat generation as a 1D horizontal chain of length $L$ tokens. NCM replaces this with a **2D coarse-to-fine hierarchy** across $K$ discrete scales.
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#080B10]">
-  <img src="/dojo/assets/ncm/ncm_stage2_transformer_prior.svg" onerror="this.onerror=null;this.src='./assets/ncm_stage2_transformer_prior.svg';" alt="Next-Concept Modeling Generation Topology" class="w-full" />
+  <img src="/dojo/assets/ncm/ncm_stage2_transformer_prior.jpg" onerror="this.onerror=null;this.src='./assets/ncm_stage2_transformer_prior.jpg';" alt="Next-Concept Modeling Generation Topology" class="w-full" />
   <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 1: Stage-2 Next-Concept Prior Architecture. Single-pass Block-Diagonal training forward pass vs. parallel coarse-to-fine inference sampling.</p>
 </div>
 
@@ -109,7 +109,7 @@ Human cognition does not generate text by greedily selecting characters or sub-w
 NCM operationalizes this intuition by decoupling language generation into a two-stage system, beginning with a **Multiscale Residual Vector Quantized Variational Autoencoder (RVQ-VAE)**.
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#0B0D13]">
-  <img src="/dojo/assets/ncm/ncm_stage1_multiscale_rvq.svg" onerror="this.onerror=null;this.src='./assets/ncm_stage1_multiscale_rvq.svg';" alt="Stage 1 Multiscale RVQ-VAE Ladder" class="w-full" />
+  <img src="/dojo/assets/ncm/ncm_stage1_multiscale_rvq.jpg" onerror="this.onerror=null;this.src='./assets/ncm_stage1_multiscale_rvq.jpg';" alt="Stage 1 Multiscale RVQ-VAE Ladder" class="w-full" />
   <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 2: Multiscale Residual VQ-VAE Architecture. Continuous projection, pooling downsamplers, nearest-neighbor codebook quantization, and straight-through reconstruction ladder.</p>
 </div>
 
@@ -233,6 +233,11 @@ $$\text{Active Fraction} = \frac{5,376}{12,544} \approx 42.8\% \implies \mathbf{
 
 This structural sparsity accelerates Stage-2 pretraining by **~40%** while executing in a single, parallel forward pass.
 
+<div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#080B10]">
+  <img src="/dojo/assets/ncm/attention_patterns_comparison.jpg" onerror="this.onerror=null;this.src='./assets/attention_patterns_comparison.jpg';" alt="Attention Patterns Comparison: Causal vs. Bidirectional vs. Block-Diagonal" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 3: Attention Topology Comparison. Causal horizontal attention (left) vs. dense bidirectional attention (center) vs. Next-Concept Block-Diagonal attention (right).</p>
+</div>
+
 ---
 
 ### The Exposure Bias Dilemma & Conditioning Corruption
@@ -260,7 +265,7 @@ Consider a 9x9 Sudoku board ($L = 81$ cells). Solving Sudoku requires global con
     <source src="./assets/sudoku_race_preview.webm" type="video/webm" />
     <source src="./assets/sudoku_race_60fps.mp4" type="video/mp4" />
   </video>
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 3: Synchronized 60 FPS Three-Paradigm Sudoku Race on Hard Split. Autoregressive (left, token 1..81) vs. Masked Diffusion (center, 128 steps) vs. Next-Concept Modeling (right, 12 parallel steps).</p>
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 4: Synchronized 60 FPS Three-Paradigm Sudoku Race on Hard Split. Autoregressive (left, token 1..81) vs. Masked Diffusion (center, 128 steps) vs. Next-Concept Modeling (right, 12 parallel steps).</p>
 </div>
 
 ---
@@ -280,8 +285,8 @@ Consider a 9x9 Sudoku board ($L = 81$ cells). Solving Sudoku requires global con
    - **Result on Hard Sudoku**: **100.0% solve rate** in exactly **12 parallel steps**!
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#080B10]">
-  <img src="/dojo/assets/ncm/sudoku_benchmark_results.svg" onerror="this.onerror=null;this.src='./assets/sudoku_benchmark_results.svg';" alt="Sudoku 3-Way Benchmark Results" class="w-full" />
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 4: Paper Table 3 Reproduction on RTX 3070 Ti. Solved Boards (%) and Number of Forward Evaluations (NFE) across Easy, Medium, and Hard Sudoku.</p>
+  <img src="/dojo/assets/ncm/sudoku_benchmark_results.jpg" onerror="this.onerror=null;this.src='./assets/sudoku_benchmark_results.jpg';" alt="Sudoku 3-Way Benchmark Results" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 5: Paper Table 3 Reproduction on RTX 3070 Ti. Solved Boards (%) and Number of Forward Evaluations (NFE) across Easy, Medium, and Hard Sudoku.</p>
 </div>
 
 ---
@@ -318,8 +323,8 @@ This is **hierarchical self-repair**—a behavior fundamentally impossible in ca
 To transition NCM from an academic curiosity to production infrastructure, we engineered the local training and inference runtime on an NVIDIA RTX 3070 Ti Laptop GPU (8,192 MiB VRAM).
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#070A11]">
-  <img src="/dojo/assets/ncm/roofline_profile_rtx3070ti.svg" onerror="this.onerror=null;this.src='./assets/roofline_profile_rtx3070ti.svg';" alt="Hardware Roofline Profile on RTX 3070 Ti" class="w-full" />
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 5: Hardware Telemetry on Ampere Architecture. Empirical Roofline curve, 50.9x position reduction vs. Diffusion, and sub-millisecond per-scale latencies.</p>
+  <img src="/dojo/assets/ncm/roofline_profile_rtx3070ti.jpg" onerror="this.onerror=null;this.src='./assets/roofline_profile_rtx3070ti.jpg';" alt="Hardware Roofline Profile on RTX 3070 Ti" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 6: Hardware Telemetry on Ampere Architecture. Empirical Roofline curve, 50.9x position reduction vs. Diffusion, and sub-millisecond per-scale latencies.</p>
 </div>
 
 ---
@@ -343,8 +348,8 @@ NCM processes **50.88 times fewer token positions than diffusion**, explaining w
 We extended NCM with two powerful test-time compute scaling mechanisms:
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#070A11]">
-  <img src="/dojo/assets/ncm/test_time_scaling_mbr_cfg.svg" onerror="this.onerror=null;this.src='./assets/test_time_scaling_mbr_cfg.svg';" alt="Test-Time Scaling Pareto Frontier" class="w-full" />
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 6: Test-Time Scaling Pareto Frontiers. Minimum Bayes Risk (MBR) consensus scaling vs. Multiscale Classifier-Free Guidance (CFG).</p>
+  <img src="/dojo/assets/ncm/test_time_scaling_mbr_cfg.jpg" onerror="this.onerror=null;this.src='./assets/test_time_scaling_mbr_cfg.jpg';" alt="Test-Time Scaling Pareto Frontier" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 7: Test-Time Scaling Pareto Frontiers. Minimum Bayes Risk (MBR) consensus scaling vs. Multiscale Classifier-Free Guidance (CFG).</p>
 </div>
 
 #### 1. Multiscale Classifier-Free Guidance (CFG)
@@ -370,7 +375,7 @@ On our RTX 3070 Ti, evaluating 16 parallel candidates requires only **$148\text{
     <source src="./assets/translation_trajectory_preview.webm" type="video/webm" />
     <source src="./assets/translation_trajectory.mp4" type="video/mp4" />
   </video>
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 7: 60 FPS Hierarchical Translation Emergence on WMT14 De-En. Coarse syntactic alignment to verbatim lexical precision across 12 scales.</p>
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 8: 60 FPS Hierarchical Translation Emergence on WMT14 De-En. Coarse syntactic alignment to verbatim lexical precision across 12 scales.</p>
 </div>
 
 ---
@@ -380,8 +385,8 @@ On our RTX 3070 Ti, evaluating 16 parallel candidates requires only **$148\text{
 To verify that the discrete codebook vectors actually represent semantically interpretable concepts, we built the **Latent Concept Probing Lab** (`src/probing/concept_probing_lab.py`), reproducing Appendix H of the Stanford paper.
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#070A11]">
-  <img src="/dojo/assets/ncm/latent_concept_probing.svg" onerror="this.onerror=null;this.src='./assets/latent_concept_probing.svg';" alt="Latent Concept Probing and Story Algebra" class="w-full" />
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 8: Latent Concept Probing Lab. Macro-structure locking vs. surface variation (Exp 7A), Story Algebra blending (Exp 7B), and spatial causal perturbations (Exp 7C).</p>
+  <img src="/dojo/assets/ncm/latent_concept_probing.jpg" onerror="this.onerror=null;this.src='./assets/latent_concept_probing.jpg';" alt="Latent Concept Probing and Story Algebra" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 9: Latent Concept Probing Lab. Macro-structure locking vs. surface variation (Exp 7A), Story Algebra blending (Exp 7B), and spatial causal perturbations (Exp 7C).</p>
 </div>
 
 ---
@@ -428,8 +433,8 @@ NCM possesses **spatial causal isolation**: you can edit the beginning of a docu
 While Next-Concept Modeling represents a massive leap forward, Section I ("Limitations & Future Work") and Table 11 ("Failure Taxonomy") of arXiv:2610.14162v1 document three critical architectural bottlenecks. In Phase 8, we engineered **three novel algorithmic extensions** to solve them.
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#090B10]">
-  <img src="/dojo/assets/ncm/phd_extensions_ablation.svg" onerror="this.onerror=null;this.src='./assets/phd_extensions_ablation.svg';" alt="Novel PhD Research Extensions Ablation" class="w-full" />
-  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 9: Phase 8 Algorithmic Innovations. Extension 8A Dynamic Early Exit, Extension 8B Confusion Corruption, and Extension 8C Confidence-Gated Copy Head.</p>
+  <img src="/dojo/assets/ncm/phd_extensions_ablation.jpg" onerror="this.onerror=null;this.src='./assets/phd_extensions_ablation.jpg';" alt="Novel PhD Research Extensions Ablation" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 10: Phase 8 Algorithmic Innovations. Extension 8A Dynamic Early Exit, Extension 8B Confusion Corruption, and Extension 8C Confidence-Gated Copy Head.</p>
 </div>
 
 ---
