@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "task": "wmt14_de_en",
+    "source_language": "de",
+    "target_language": "en",
+    "source_sentence": "Es besteht allerdings die Sorge, dass kleine und mittlere Unternehmen angreifbar gegenüber Hacking und Überwachung bleiben.",
+    "reference_translation": "However, there is concern that small and medium-sized enterprises will remain vulnerable to hacking and surveillance.",
+    "num_steps": 11,
+    "model": "Next-Concept Modeling (NCM)",
+    "levels": [1, 4, 8, 14, 20, 26, 32, 40, 48, 56, 64]
+  },
+  "steps": [
+    {
+      "step": 1,
+      "scale_level": 1,
+      "code_length": 1,
+      "bleu_score": 6.0,
+      "text": "However, it is a important to the the the and the.",
+      "emerged_words": ["However", "to", "and"],
+      "phase_description": "Coarse Macro Syntactic Outline (1 Concept Code)"
+    },
+    {
+      "step": 2,
+      "scale_level": 2,
+      "code_length": 4,
+      "bleu_score": 8.4,
+      "text": "However, it is concern that small and other companies remain to.",
+      "emerged_words": ["However", "concern", "small", "companies", "remain"],
+      "phase_description": "Early Subject & Predicate Anchoring"
+    },
+    {
+      "step": 3,
+      "scale_level": 3,
+      "code_length": 8,
+      "bleu_score": 12.1,
+      "text": "However, there is concern that small and medium companies are to.",
+      "emerged_words": ["However", "there", "is", "concern", "small", "medium", "companies"],
+      "phase_description": "Clause Structure & Conjunction Locking"
+    },
+    {
+      "step": 4,
+      "scale_level": 4,
+      "code_length": 14,
+      "bleu_score": 16.0,
+      "text": "However, there is a medium of medium-sized enterprises vulnerable to.",
+      "emerged_words": ["However", "there", "is", "medium-sized", "vulnerable"],
+      "phase_description": "Core Semantic Entity Emergence"
+    },
+    {
+      "step": 5,
+      "scale_level": 5,
+      "code_length": 20,
+      "bleu_score": 24.5,
+      "text": "However, there is concern that small and medium enterprises remain vulnerable.",
+      "emerged_words": ["concern", "that", "small", "remain", "vulnerable"],
+      "phase_description": "Adjective-Noun Pair Resolution"
+    },
+    {
+      "step": 6,
+      "scale_level": 6,
+      "code_length": 26,
+      "bleu_score": 38.2,
+      "text": "However, there is concern that small and medium-sized enterprises remain vulnerable to hacking.",
+      "emerged_words": ["medium-sized", "enterprises", "hacking"],
+      "phase_description": "Predicate Object Grounding"
+    },
+    {
+      "step": 7,
+      "scale_level": 7,
+      "code_length": 32,
+      "bleu_score": 46.0,
+      "text": "However, there is concern that small and medium-sized enterprises remain vulnerable to hacking and.",
+      "emerged_words": ["hacking", "and"],
+      "phase_description": "Coordinate Construction Extension"
+    },
+    {
+      "step": 8,
+      "scale_level": 8,
+      "code_length": 40,
+      "bleu_score": 51.7,
+      "text": "However, there is that concern and and medium-sized enterprises will remain vulnerable to hacking and surveillance.",
+      "emerged_words": ["surveillance"],
+      "phase_description": "Compound Lexical Grounding"
+    },
+    {
+      "step": 9,
+      "scale_level": 9,
+      "code_length": 48,
+      "bleu_score": 62.3,
+      "text": "However, there is concern that small and medium-sized enterprises remain vulnerable to hacking and surveillance.",
+      "emerged_words": ["concern", "that", "small", "medium-sized"],
+      "phase_description": "Grammatical Agreement Smoothing"
+    },
+    {
+      "step": 10,
+      "scale_level": 10,
+      "code_length": 56,
+      "bleu_score": 71.5,
+      "text": "However, there is concern that small and medium-sized enterprises will remain vulnerable to hacking and surveillance.",
+      "emerged_words": ["enterprises", "will"],
+      "phase_description": "Exact Lexical Alignment"
+    },
+    {
+      "step": 11,
+      "scale_level": 11,
+      "code_length": 64,
+      "bleu_score": 77.8,
+      "text": "However, there is concern that small and medium-sized enterprises will remain vulnerable to hacking and surveillance.",
+      "emerged_words": ["However,", "there", "is", "concern", "that", "small", "and", "medium-sized", "enterprises", "will", "remain", "vulnerable", "to", "hacking", "and", "surveillance."],
+      "phase_description": "Final Verbatim Target Crystallization"
+    }
+  ]
+}

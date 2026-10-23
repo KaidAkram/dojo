@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "project": "NCM-Apex",
+    "phase": "Phase 8: Novel PhD Research Extensions",
+    "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+    "timestamp": "2026-10-23T10:59:57Z"
+  },
+  "extension_8a_early_exit": {
+    "easy": [
+      {
+        "tau_exit": 0.0,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 128.14
+      },
+      {
+        "tau_exit": 0.005,
+        "mean_exit_step": 7.1,
+        "nfe_reduction_pct": 40.8,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 55.51
+      },
+      {
+        "tau_exit": 0.01,
+        "mean_exit_step": 7.1,
+        "nfe_reduction_pct": 40.8,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 52.77
+      },
+      {
+        "tau_exit": 0.02,
+        "mean_exit_step": 7.1,
+        "nfe_reduction_pct": 40.8,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 50.71
+      },
+      {
+        "tau_exit": 0.05,
+        "mean_exit_step": 7.1,
+        "nfe_reduction_pct": 40.8,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 54.29
+      },
+      {
+        "tau_exit": 0.1,
+        "mean_exit_step": 7.1,
+        "nfe_reduction_pct": 40.8,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 54.07
+      }
+    ],
+    "medium": [
+      {
+        "tau_exit": 0.0,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 108.51
+      },
+      {
+        "tau_exit": 0.005,
+        "mean_exit_step": 10.8,
+        "nfe_reduction_pct": 10.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 92.36
+      },
+      {
+        "tau_exit": 0.01,
+        "mean_exit_step": 10.8,
+        "nfe_reduction_pct": 10.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 95.79
+      },
+      {
+        "tau_exit": 0.02,
+        "mean_exit_step": 10.8,
+        "nfe_reduction_pct": 10.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 87.79
+      },
+      {
+        "tau_exit": 0.05,
+        "mean_exit_step": 10.8,
+        "nfe_reduction_pct": 10.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 91.8
+      },
+      {
+        "tau_exit": 0.1,
+        "mean_exit_step": 10.5,
+        "nfe_reduction_pct": 12.5,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 90.94
+      }
+    ],
+    "hard": [
+      {
+        "tau_exit": 0.0,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 104.68
+      },
+      {
+        "tau_exit": 0.005,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 106.1
+      },
+      {
+        "tau_exit": 0.01,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 113.45
+      },
+      {
+        "tau_exit": 0.02,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 110.49
+      },
+      {
+        "tau_exit": 0.05,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 106.59
+      },
+      {
+        "tau_exit": 0.1,
+        "mean_exit_step": 12.0,
+        "nfe_reduction_pct": 0.0,
+        "solve_rate_pct": 0.0,
+        "latency_ms": 108.22
+      }
+    ]
+  },
+  "extension_8b_confusion_corruption": {
+    "uniform_baseline_ppl": 18.85,
+    "confusion_temperatures": [
+      {
+        "tau_c": 0.2,
+        "gen_ppl": 18.05,
+        "ppl_reduction_pct": 4.24,
+        "noise_fraction_observed": 0.502
+      },
+      {
+        "tau_c": 0.5,
+        "gen_ppl": 17.82,
+        "ppl_reduction_pct": 5.46,
+        "noise_fraction_observed": 0.523
+      },
+      {
+        "tau_c": 1.0,
+        "gen_ppl": 18.25,
+        "ppl_reduction_pct": 3.18,
+        "noise_fraction_observed": 0.428
+      }
+    ],
+    "optimal_tau_c": 0.5,
+    "optimal_ppl_reduction_pct": 5.46
+  },
+  "extension_8c_copy_gate": {
+    "num_stress_cases": 50,
+    "baseline_entity_error_pct": 1.2,
+    "copy_gated_entity_error_pct": 0.02,
+    "error_reduction_pct": 98.33,
+    "sample_entities_preserved": [
+      "1957",
+      "1848",
+      "2024",
+      "Huawei",
+      "Bavaria",
+      "Kaid",
+      "GA104",
+      "RTX3070"
+    ]
+  },
+  "executive_summary": {
+    "easy_sudoku_nfe_reduction_pct": 40.0,
+    "tinystories_ppl_gain_pct": 5.46,
+    "rare_entity_error_reduction_pct": 98.33,
+    "peak_vram_gib": 0.074
+  }
+}

@@ -1,0 +1,761 @@
+{
+  "metadata": {
+    "project": "NCM-Apex",
+    "phase": "Phase 7 (Latent Concept Probing, Story Algebra & Causal Steering)",
+    "checkpoint": "hazyresearch/ncm-tinystories",
+    "context_length": 128,
+    "levels": [
+      1,
+      8,
+      16,
+      24,
+      32,
+      40,
+      52,
+      64,
+      76,
+      92,
+      108,
+      128
+    ],
+    "num_levels": 12,
+    "timestamp": "2026-10-23T10:34:52Z"
+  },
+  "experiment_7a_surface_variation": {
+    "source_story": "Once upon a time, there was a little boy named Timmy who was shivering in the cold winter snow. Under a tall oak tree, he spotted a mysterious wooden box. Timmy opened the box and found a thick soft blanket to wrap himself up warm. Suddenly, the blanket began to wiggle and move! Timmy giggled with joy when a tiny fluffy puppy poked its head out to lick his cheek.",
+    "k_cut": 3,
+    "macro_blueprint_text": "Once a time, there was a, a a was a boy. a who was a a house. cold tree tree. tree tree. tree tree. The the.. opened the blanket. the blanket a warm blanket. blanket.. As the the, the melt, the began. joy and joy..., tiny saw. tiny. his tiny. his on. cheek. his. was\n.. his was.. the\n.. help.. was\n... the\n was.......\n was\n.... he was..... was...",
+    "mean_pairwise_edit_pct": 85.56,
+    "plot_arc_invariance": true,
+    "variations": [
+      {
+        "seed": 42,
+        "text": ", and the boy was happy to see a little boy, who had been been a very cold time. He saw the boy by the pine pine, and he opened the door. He brought a warm blanket and wrapped the little boy's face. Suddenly, the leaves began to move, and little little boy squealed with delight, with a small,, furry rub rubbed against the boy's face face, and wanted to get more more So the boy and the boy started to run, the slide, and all all the way to the park. As they they started to laugh, the boy felt even more,, when the pine was tall and",
+        "word_edit_distance": 97,
+        "normalized_edit_pct": 88.99,
+        "plot_beats_preserved": true,
+        "entity_swap": {
+          "wrap": "thick woolen blanket",
+          "surprise": "tiny fluffy puppy"
+        }
+      },
+      {
+        "seed": 101,
+        "text": "the of sound was. Finally, he found the old boy who lived in in cold, winter winter. The boy saw that the tree and that he was hungry hungry. He opened the box box, and carefully wrapped wrapped the blanket the tree it. The tree began to shake, and the boy's screamed with delight. The tree creature had a cheek on cheek cheek as watched the children.\nAll the children loved loved, and the boy wanted keep keep the tree to try it. The birds sang flowers, and the children started to applaud. The boy sang a very happy and..  TheThe was was was so much that",
+        "word_edit_distance": 97,
+        "normalized_edit_pct": 90.65,
+        "plot_beats_preserved": false,
+        "entity_swap": {
+          "wrap": "warm striped scarf",
+          "surprise": "little shivering kitten"
+        }
+      },
+      {
+        "seed": 777,
+        "text": "began the magical land, there was a little girl, who were playing her children in the cold park. They found an oak tree, underneath the little girl,, opened the door and took out a warm, warm blanket wrapped around herself.As the little girl she began to glow, fear, with joy and ran around of two two children a tiny,, pat against against its head. The girl thanked the tree, and the children waved goodbye. The children decided to go explore the tree and explore.\nThe girl and the children came back to the tree, they noticed that that there was a blanket, with no branches..,",
+        "word_edit_distance": 90,
+        "normalized_edit_pct": 85.71,
+        "plot_beats_preserved": true,
+        "entity_swap": {
+          "wrap": "cozy knitted sweater",
+          "surprise": "baby red squirrel"
+        }
+      },
+      {
+        "seed": 999,
+        "text": "two children. The was was older boy and the girl girl, who had a cold winter. The boy saw that she was feeling lonely lonely, so the boy opened his bag. He took out a, soft blanket and wrapped it around girl. Suddenly, the snow began to shake and the children filled filled joy joy. children children giggling and giggled as the boy patted his forehead. \nThe boy thanked the little girl, for boy boy, he liked to play instead. He watched the other children run from to a nearby park, he began to do them the same way. He noticed that there were hanging from one tree, and to",
+        "word_edit_distance": 100,
+        "normalized_edit_pct": 90.91,
+        "plot_beats_preserved": true,
+        "entity_swap": {
+          "wrap": "heavy fleece blanket",
+          "surprise": "friendly stray dog"
+        }
+      },
+      {
+        "seed": 1337,
+        "text": "Suddenly someone else else, under a tree. It was a little girl, who was shivering in the winter. Suddenly, the little saw saw the pine tree, quickly ran. She quickly grabbed her warm blanket and wrapped it around the tree. The palm began began move, and the girl girl shouted joy! \nThe little girl was tiny, with a gentle kiss on her her forehead. forehead goodnight, the birds and birds in the park were happy excited. They wanted to take the little girl take her to the park. She ran to the swing, jumped on the palm tree, and soon the set had set to..The child",
+        "word_edit_distance": 93,
+        "normalized_edit_pct": 87.74,
+        "plot_beats_preserved": true,
+        "entity_swap": {
+          "wrap": "soft velvet shawl",
+          "surprise": "curious white bunny"
+        }
+      }
+    ]
+  },
+  "experiment_7b_concept_algebra": {
+    "story_a": "Once upon a time, two twins named Leo and Mia loved drawing with colorful crayons. One sunny afternoon, they found an old wooden billboard in the park. Together, they drew bright rainbows, smiling suns, and giant green trees on the wood. The whole neighborhood came by to admire their beautiful bright artwork and cheered happily.",
+    "story_b": "Once upon a time, a little girl named Lily was lost in the cold dark woods. The chilly wind blew through the trees, making her shiver and tremble. Deep in a mossy hollow, she discovered a warm glowing velvet cloak. When she wrapped the cloak around her shoulders, gentle magic surrounded her with cozy warmth and peaceful light.",
+    "blend_results": [
+      {
+        "alpha": 0.25,
+        "formula": "lambda=0.25 * StoryA + 0.75 * StoryB",
+        "hybrid_text": "time, time was a a,, a. a cold a.. wind blew the wind. the wind, the wind, the making..G the the..ant.ill.. trees. a ho... the When...,. the,, theak andak. his. a. his a a.....\n...\n\n.. was\n.\n\n.\n\n.\n,.\n\n.\n was\n. He...\n.\n the the..\n the. the the the\n. his",
+        "provenance_stats": {
+          "source_a_pct": 0.0,
+          "source_b_pct": 18.5,
+          "syntactic_glue_pct": 81.5
+        },
+        "token_lineage": [
+          {
+            "token": "time,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "time",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a,,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "cold",
+            "heritage": "source_b"
+          },
+          {
+            "token": "a..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "wind",
+            "heritage": "source_b"
+          },
+          {
+            "token": "blew",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "wind.",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "wind,",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "wind,",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "making..G",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the..ant.ill..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "ho...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "When...,.",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the,,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "theak",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "andak.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "his.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "his",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a.....",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ",.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "He...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "his",
+            "heritage": "syntactic_glue"
+          }
+        ]
+      },
+      {
+        "alpha": 0.5,
+        "formula": "lambda=0.50 * StoryA + 0.50 * StoryB",
+        "hybrid_text": "time, a was a, a,,. a loved... day, One day, the wind. the the in the big. the\n the the..ays.ays.. trees, trees and the. and the.. the... the, his the beautiful and beauty. his.... lived..\n..\n\n\n\n\n\n.\n\n.\n.,.\n.\n was\n.\n...\n was the\n.,.\n\n.\n.",
+        "provenance_stats": {
+          "source_a_pct": 6.2,
+          "source_b_pct": 8.3,
+          "syntactic_glue_pct": 85.4
+        },
+        "token_lineage": [
+          {
+            "token": "time,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": "a,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a,,.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "loved...",
+            "heritage": "source_a"
+          },
+          {
+            "token": "day,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "One",
+            "heritage": "source_a"
+          },
+          {
+            "token": "day,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "wind.",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "in",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "big.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the..ays.ays..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "and",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "and",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "his",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "beautiful",
+            "heritage": "source_a"
+          },
+          {
+            "token": "and",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "beauty.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "his....",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "lived..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".,.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".,.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          }
+        ]
+      },
+      {
+        "alpha": 0.75,
+        "formula": "lambda=0.75 * StoryA + 0.25 * StoryB",
+        "hybrid_text": "time, a was a time a,, crayons, loved.. One day, One day, he,. in the in. big... sun sun.. brightly. The sun. and trees trees and trees. and trees. the the... beautiful the the beautiful the the beauty..... They all lived...\n\n\n\n.\n.\n.\n\n..\n.\n was\n.\n was\n..\n.,\n.\n.",
+        "provenance_stats": {
+          "source_a_pct": 13.2,
+          "source_b_pct": 5.7,
+          "syntactic_glue_pct": 81.1
+        },
+        "token_lineage": [
+          {
+            "token": "time,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": "a",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "time",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "a,,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "crayons,",
+            "heritage": "source_a"
+          },
+          {
+            "token": "loved..",
+            "heritage": "source_a"
+          },
+          {
+            "token": "One",
+            "heritage": "source_a"
+          },
+          {
+            "token": "day,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "One",
+            "heritage": "source_a"
+          },
+          {
+            "token": "day,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "he,.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "in",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "in.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "big...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "sun",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "sun..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "brightly.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "The",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "sun.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "and",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "and",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "and",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "trees.",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "beautiful",
+            "heritage": "source_a"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "beautiful",
+            "heritage": "source_a"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "the",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "beauty.....",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "They",
+            "heritage": "source_a"
+          },
+          {
+            "token": "all",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "lived...",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": "was",
+            "heritage": "source_b"
+          },
+          {
+            "token": "..",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".,",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          },
+          {
+            "token": ".",
+            "heritage": "syntactic_glue"
+          }
+        ]
+      }
+    ]
+  },
+  "experiment_7c_causal_patching": {
+    "source_story": "Once upon a time, there was a little boy named Timmy who was shivering in the cold winter snow. Under a tall oak tree, he spotted a mysterious wooden box. Timmy opened the box and found a thick soft blanket to wrap himself up warm. Suddenly, the blanket began to wiggle and move! Timmy giggled with joy when a tiny fluffy puppy poked its head out to lick his cheek.",
+    "scale_idx": 5,
+    "patch_position": 0,
+    "original_code": 1944,
+    "new_code": 3444,
+    "original_text": "Once a time time, there was a little boy named Timmy who was shivering in the winter snow. Under the tall pine oak, he spotted a mysterious wooden box. Timmy opened the box and found a soft, white blanket to cover up himself warm. Suddenly, the blanket began to move and talk! Timmy trembled with joy as a cute tiny puppy puppy rubbed its head out on Timmy's cheek.\nTimmy and the puppy began to unite together in the park. They askedewe the the houses, the the handing the park, even the park. The little boy happy happy, said, \"uckuck,,,, widere",
+    "perturbed_text": "upon time time, there was a little boy named Timmy who was shivering in the cold snow. Under the tall oak oak, he spotted a mysterious wooden box. Timmy opened the box and found a soft, white blanket to to himself himself up. Suddenly, the blanket began to move and move! Timmy trembled with excitement, as a tiny puppy puppy its its head to lick Timmy's face.\nTimmy and the puppy began all all unite in the park. They aazzrew up the park, crawled up the ladder,, even even the park. The boy, happy happy said said \" Zippye,,e,, she",
+    "quadrant_1_edit_pct": 20.0,
+    "quadrant_4_stability_pct": 34.6
+  }
+}
