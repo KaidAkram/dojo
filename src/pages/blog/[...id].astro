@@ -236,3 +236,38 @@ if (isSubpost(post.id)) {
     }
   }
 </style>
+
+<script is:inline>
+  function initAutoplayVideos() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(function(video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('loop', '');
+      video.setAttribute('autoplay', '');
+      const p = video.play();
+      if (p !== undefined) {
+        p.catch(function(err) {
+          const force = function() {
+            video.muted = true;
+            video.play();
+            window.removeEventListener('click', force);
+            window.removeEventListener('touchstart', force);
+          };
+          window.addEventListener('click', force, { once: true });
+          window.addEventListener('touchstart', force, { once: true });
+        });
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAutoplayVideos);
+  } else {
+    initAutoplayVideos();
+  }
+  document.addEventListener('astro:page-load', initAutoplayVideos);
+</script>

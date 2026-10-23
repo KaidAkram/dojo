@@ -1,7 +1,7 @@
 ---
 title: "Mastering Next-Concept Modeling: Coarse-to-Fine Parallel Generation on RTX 3070 Ti"
 description: "A deep dive into Next-Concept Modeling (arXiv:2610.14162v1), from Stage 1 multiscale residual VQ-VAE to Stage 2 block-diagonal priors, 3-paradigm spatial reasoning, hardware roofline profiling, latent concept probing, and 3 novel PhD extensions."
-date: 2026-10-23
+date: 2026-10-23T15:15:33.000Z
 tags: ["ai", "deep-learning", "ncm", "transformers", "hardware", "systems", "research"]
 authors: ["0xakr4m"]
 image: ../images/headers/vagabond-ncm.png
@@ -9,6 +9,21 @@ draft: false
 ---
 
 > "Perceive that which cannot be seen with the eye." — Miyamoto Musashi, *The Book of Five Rings*
+
+<div class="my-6 p-4 rounded-xl border border-cyan-500/30 bg-cyan-950/20 backdrop-blur flex flex-col md:flex-row items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <span class="text-2xl">⚡</span>
+    <div>
+      <div class="text-xs uppercase tracking-wider text-cyan-400 font-mono font-bold">Research Artifacts & Open-Source Implementations</div>
+      <div class="text-sm text-slate-300">Reproduction, benchmarking, and 3 novel PhD extensions based on Stanford Hazy Research & Together AI.</div>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-2">
+    <a href="https://arxiv.org/pdf/2610.14162" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/40 text-xs font-mono font-semibold transition-all">📄 arXiv:2610.14162 (PDF)</a>
+    <a href="https://github.com/HazyResearch/ncm" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-mono font-semibold transition-all">🐙 Stanford Repo</a>
+    <a href="https://github.com/KaidAkram/ncm-apex" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-xs font-mono font-semibold transition-all">⚔️ NCM-Apex Repo</a>
+  </div>
+</div>
 
 What if the fundamental premise of modern generative AI—that thought must be serialized into a flat, left-to-right stream of tiny sub-word tokens—is an architectural dead end?
 
@@ -55,21 +70,10 @@ $$\text{Tensor Core Utilization} = \frac{0.608 \text{ TFLOP/s}}{43.4 \text{ TFLO
 
 **Autoregressive LLMs waste 98.6% of modern GPU compute capacity.** The Tensor Cores sit completely idle, waiting for bytes to trickle across the memory bus.
 
-```
-          Hardware Roofline Limit on RTX 3070 Ti (43.4 TFLOP/s Ceiling)
-Compute  ▲
-Throughput
- (TFLOP/s)│                                    ┌──────────────────────────── Compute Ceiling (43.4)
-          │                                   /
-     16.3 │                   ★ NCM (AI=26.8)/ (16.3 TFLOP/s - 37.6% utilization!)
-          │                                 /
-          │                                /
-      0.61│   ★ AR (AI=1.0)               /  Ridge Point = 71.4 FLOP/Byte
-          │   (0.61 TFLOP/s - 1.4%)      /
-          └─────────────────────────────┴────────────────────────────────►
-          1.0                           71.4                   100.0
-                              Arithmetic Intensity (FLOPs / Byte)
-```
+<div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#080B10]">
+  <img src="/dojo/assets/ncm/rtx3070ti_roofline_curve.jpg" onerror="this.onerror=null;this.src='./assets/rtx3070ti_roofline_curve.jpg';" alt="Hardware Roofline Model on RTX 3070 Ti: Autoregressive vs Next-Concept Modeling" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 1B: Hardware Roofline Limit on RTX 3070 Ti (43.4 TFLOP/s Ceiling). Autoregressive generation (AI=1.0, 0.61 TFLOP/s, 1.4% utilization) is throttled by memory bandwidth, while Next-Concept Modeling (AI=26.8, 16.3 TFLOP/s, 37.6% utilization) operates close to the compute ceiling.</p>
+</div>
 
 ---
 
@@ -209,16 +213,10 @@ We enforce this with a **Custom Block-Diagonal Attention Mask**:
 
 $$\mathcal{M}_{i, j} = \begin{cases} 0.0 & \text{if } \text{level}(i) == \text{level}(j) \\ -\infty & \text{otherwise} \end{cases}$$
 
-```
-                Block-Diagonal Attention Structure (N = 322 Tokens)
-Token Index j:   [Level 1: 1]  [Level 2: 8]  [Level 3: 16] ... [Level 12: 128]
-Token Index i:
-[Level 1: 1]   │    ████     │   -inf      │   -inf          │     -inf
-[Level 2: 8]   │    -inf     │   ████      │   -inf          │     -inf
-[Level 3: 16]  │    -inf     │   -inf      │   ████          │     -inf
-   ...         │    -inf     │   -inf      │   -inf          │     -inf
-[Level 12: 128]│    -inf     │   -inf      │   -inf          │     ████
-```
+<div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-[#080B10]">
+  <img src="/dojo/assets/ncm/block_diagonal_attention_matrix.jpg" onerror="this.onerror=null;this.src='./assets/block_diagonal_attention_matrix.jpg';" alt="Block-Diagonal Attention Matrix Structure (N = 322 Tokens)" class="w-full" />
+  <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 2B: Block-Diagonal Attention Structure across 12 hierarchical scales (N = 322 tokens). Non-diagonal blocks are masked to -inf to eliminate redundant cross-scale attention, retaining 42.8% active entries and yielding a 57.2% reduction in attention FLOPs.</p>
+</div>
 
 #### The Mathematical Proof of Efficiency
 For $N = \sum_{k=1}^K l_k = 112$ (on our 3-scale validation test), full dense attention requires computing:
@@ -259,11 +257,11 @@ To truly expose the architectural divergence between paradigms, we must evaluate
 Consider a 9x9 Sudoku board ($L = 81$ cells). Solving Sudoku requires global consistency: every row, column, and 3x3 box must contain digits 1 through 9 with zero duplicates.
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-black">
-  <video autoplay loop muted playsinline controls class="w-full">
-    <source src="/dojo/assets/ncm/sudoku_race_preview.webm" type="video/webm" />
+  <video autoplay loop muted playsinline preload="auto" controls class="w-full rounded-lg" poster="/dojo/assets/ncm/sudoku_benchmark_results.jpg">
     <source src="/dojo/assets/ncm/sudoku_race_60fps.mp4" type="video/mp4" />
-    <source src="./assets/sudoku_race_preview.webm" type="video/webm" />
+    <source src="/dojo/assets/ncm/sudoku_race_preview.webm" type="video/webm" />
     <source src="./assets/sudoku_race_60fps.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
   </video>
   <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 4: Synchronized 60 FPS Three-Paradigm Sudoku Race on Hard Split. Autoregressive (left, token 1..81) vs. Masked Diffusion (center, 128 steps) vs. Next-Concept Modeling (right, 12 parallel steps).</p>
 </div>
@@ -369,11 +367,11 @@ $$\hat{y}_{\text{MBR}} = \arg\max_{y_i} \sum_{j=1}^{K_{\text{cand}}} \text{Simil
 On our RTX 3070 Ti, evaluating 16 parallel candidates requires only **$148\text{ ms}$** and **$0.48\text{ GiB}$ peak VRAM**, beating 128-step diffusion while running **9.1x faster**!
 
 <div class="my-8 rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-black">
-  <video autoplay loop muted playsinline controls class="w-full">
-    <source src="/dojo/assets/ncm/translation_trajectory_preview.webm" type="video/webm" />
+  <video autoplay loop muted playsinline preload="auto" controls class="w-full rounded-lg" poster="/dojo/assets/ncm/roofline_profile_rtx3070ti.jpg">
     <source src="/dojo/assets/ncm/translation_trajectory.mp4" type="video/mp4" />
-    <source src="./assets/translation_trajectory_preview.webm" type="video/webm" />
+    <source src="/dojo/assets/ncm/translation_trajectory_preview.webm" type="video/webm" />
     <source src="./assets/translation_trajectory.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
   </video>
   <p class="text-xs text-center text-slate-400 py-2 bg-slate-900/60 border-t border-slate-800">Figure 8: 60 FPS Hierarchical Translation Emergence on WMT14 De-En. Coarse syntactic alignment to verbatim lexical precision across 12 scales.</p>
 </div>
@@ -512,3 +510,42 @@ The era of treating 80-billion-transistor GPUs as sequential memory-bandwidth sl
 The complete PyTorch codebase, test suite, and interactive traces are available in the open-source repository.
 
 *Perceive that which cannot be seen with the eye.* ⚔️
+
+<script is:inline>
+  (function() {
+    function ensureLoopingAutoplay() {
+      const vids = document.querySelectorAll('video');
+      vids.forEach(function(v) {
+        v.muted = true;
+        v.defaultMuted = true;
+        v.loop = true;
+        v.playsInline = true;
+        v.setAttribute('muted', '');
+        v.setAttribute('playsinline', '');
+        v.setAttribute('loop', '');
+        v.setAttribute('autoplay', '');
+        const p = v.play();
+        if (p !== undefined) {
+          p.catch(function() {
+            function forceStart() {
+              v.muted = true;
+              v.play();
+              window.removeEventListener('click', forceStart);
+              window.removeEventListener('scroll', forceStart);
+              window.removeEventListener('touchstart', forceStart);
+            }
+            window.addEventListener('click', forceStart, { once: true });
+            window.addEventListener('scroll', forceStart, { once: true });
+            window.addEventListener('touchstart', forceStart, { once: true });
+          });
+        }
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ensureLoopingAutoplay);
+    } else {
+      ensureLoopingAutoplay();
+    }
+    document.addEventListener('astro:page-load', ensureLoopingAutoplay);
+  })();
+</script>
