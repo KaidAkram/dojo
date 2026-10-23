@@ -505,9 +505,20 @@ Over the course of eight intensive engineering phases, we proved that Next-Conce
 - **-5.46% Generative PPL Gain** via Confusion-Weighted Corruption.
 - **98.3% Entity Error Reduction** via Confidence-Gated Pointer Routing.
 
-The era of treating 80-billion-transistor GPUs as sequential memory-bandwidth slaves is drawing to a close. By thinking vertically—conceiving global concepts first and words last—we unlock both the computational power of modern silicon and the true hierarchical nature of human thought.
+The complete PyTorch codebase, unit tests, and interactive trajectories are available in the open-source repository:
 
-The complete PyTorch codebase, test suite, and interactive traces are available in the open-source repository.
+<div class="my-8 p-5 rounded-xl border border-cyan-500/40 bg-cyan-950/20 backdrop-blur flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+  <div class="flex items-center gap-3">
+    <span class="text-3xl">⚔️</span>
+    <div>
+      <div class="text-sm font-bold text-cyan-300 font-mono uppercase tracking-wider">Open-Source Repository</div>
+      <div class="text-xs text-slate-300 mt-1">Complete PyTorch source code, unit tests, training scripts, and benchmarks available at <a href="https://github.com/KaidAkram/ncm-apex" target="_blank" rel="noopener noreferrer" class="text-cyan-400 underline font-mono">github.com/KaidAkram/ncm-apex</a>.</div>
+    </div>
+  </div>
+  <a href="https://github.com/KaidAkram/ncm-apex" target="_blank" rel="noopener noreferrer" class="shrink-0 px-4 py-2.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs font-mono transition-all shadow-lg shadow-cyan-500/20">
+    ⭐ Star NCM-Apex on GitHub
+  </a>
+</div>
 
 *Perceive that which cannot be seen with the eye.* ⚔️
 
